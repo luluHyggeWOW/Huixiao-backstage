@@ -1,5 +1,5 @@
 <template>
-  <div class="elcard">
+  <div class="elcard2">
     <div class="box">
       <img src="../../assets/images/logo1.png" alt="" class="avatar">
       <div class="title">
@@ -16,15 +16,13 @@ import { getTime } from "@/utils/time";
 </script>
 
 <style scoped lang="scss">
-.elcard {
+.elcard2 {
   // width: 96%;
-  margin: auto;
-  margin-top: 2%;
+  width: calc(100vw - 250px);
   // background: ;
-  height: calc(100vh - 250px);
-  width: 100%;
+  height: calc(100vh - 100px);
   background: url("../../assets/images/code.gif");
-  background-size: 100% 100%;
+  background-size: 120% 100%;
   .box {
     display: flex;
     .avatar {

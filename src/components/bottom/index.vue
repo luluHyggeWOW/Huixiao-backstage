@@ -1,49 +1,39 @@
+
+
 <template>
-  <div class="bottom">
-    <div class="content">
-      <div class="left">
-        京ICP备 13018369号 电话挂号010-56253825
-      </div>
-      <div class="right">
-        <span>联系我们</span>
-        <span>合作伙伴</span>
-        <span>用户协议</span>
-        <span>隐私协议</span>
-      </div>
-    </div>
+  <div class="bottom" v-if="$route.path!='/home'">
+    <el-pagination v-model:current-page="pageNo" v-model:page-size="pageSize" :page-sizes="pageSizes" :small="small"
+      :disabled="disabled" :background="true" layout=" prev, pager,next,->,  jumper,total, sizes," :total="total"
+      @size-change="handleSizeChange" @current-change="handleCurrentChange" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+import { useRoute } from "vue-router";
+import { DataStore } from "@/store/date/index";
+let dataStore = DataStore();
+let $route = useRoute();
+let pageNo = ref<number>(0);
+let pageSize = ref<number>(10);
+let pageSizes = ref<number[]>([10, 20, 30, 40]);
+let total = ref<number>(20);
+let dataArr = ref<any>();
+let searchText = dataStore.SearchText;
+const handleSizeChange = () => {
+  dataStore.getData();
+};
+const handleCurrentChange = () => {
+  dataStore.getData();
+};
 </script>
 
 <style scoped lang="scss">
 .bottom {
-  width: 100%;
   height: 50px;
-  background: rgb(238, 236, 236);
   display: flex;
-  justify-content: center;
-  .content {
-    width: 90%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    color: rgb(92, 92, 92);
-    .left {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .right {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      span {
-        margin: 0 5px;
-        cursor: pointer;
-      }
-    }
-  }
+  bottom: 0px;
+  position: absolute;
+  bottom: 20px;
 }
 </style>

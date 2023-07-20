@@ -2,8 +2,7 @@
   <div>
     <el-form>
       <el-form-item>
-        <el-input v-model="searchText" placeholder="请搜索" style="width:250px" size="large" :blur="search()"></el-input>
-
+        <Search></Search>
       </el-form-item>
       <el-form-item>
         <el-table :data="tableData" style="width: 100%" border>
@@ -13,10 +12,10 @@
           <el-table-column prop="name" label="更新日期" width="150" />
           <el-table-column label="操作" width="200">
             <template #default>
-              <el-button link type="primary" size="big" @click="updateNewsDrawerShow">更新新闻</el-button>
+              <el-button link type="primary" size="large" @click="updateNewsDrawerShow">更新新闻</el-button>
               <el-popconfirm title="Are you sure to delete this?">
                 <template #reference>
-                  <el-button link type="warning" size="big" @click="deleteNews">删除新闻</el-button>
+                  <el-button link type="warning" size="large" @click="deleteNews">删除新闻</el-button>
                 </template>
               </el-popconfirm>
 
@@ -60,8 +59,11 @@
 
 <script setup lang="ts">
 import { log } from "console";
-import { ref } from "vue";
-let searchText = ref<string>();
+import { onMounted, ref } from "vue";
+import { DataStore } from "@/store/date/index";
+import { ElMessage } from "element-plus";
+let dataStore = DataStore();
+let newsDataArr = dataStore.DataArr;
 let updateNewsDrawer = ref<boolean>(false);
 let updateNewsText = ref<string>();
 const tableData = ref([
@@ -117,6 +119,9 @@ const updateNews = async () => {
     ElMessage({ type: "error", message: "失败" });
   }
 };
+onMounted(() => {
+  dataStore.getData();
+});
 </script>
 
 <style scoped lang="scss">

@@ -2,8 +2,7 @@
   <div>
     <el-form>
       <el-form-item>
-        <el-input v-model="searchText" placeholder="请搜索" style="width:250px" size="large" :blur="search()"></el-input>
-
+        <Search></Search>
       </el-form-item>
       <el-form-item>
         <el-table :data="tableData" style="width: 100%" border>
@@ -14,15 +13,15 @@
           <el-table-column prop="name" label="角色" />
           <el-table-column label="操作" fixed="right">
             <template #default={row}>
-              <el-button link type="error" size="big" @click="updateUserShow">编辑用户</el-button>
+              <el-button link type="error" size="large" @click="updateUserShow">编辑用户</el-button>
               <el-popconfirm title="确认要重置密码?" @confirm="updateUserPassword(row)">
                 <template #reference>
-                  <el-button link type="primary" size="big">重置密码</el-button>
+                  <el-button link type="primary" size="large">重置密码</el-button>
                 </template>
               </el-popconfirm>
               <el-popconfirm title="确认要注销用户?" @confirm="deleteUser(row)">
                 <template #reference>
-                  <el-button link type="warning" size="big">注销用户</el-button>
+                  <el-button link type="warning" size="large">注销用户</el-button>
                 </template>
               </el-popconfirm>
             </template>
@@ -31,6 +30,7 @@
         </el-table>
       </el-form-item>
     </el-form>
+
     <el-drawer v-model="updateUserDrawer" :direction="direction" size="30%">
       <template #header>
         <h4>编辑用户</h4>
@@ -64,8 +64,11 @@
 
 <script setup lang="ts">
 import { log } from "console";
-import { ref } from "vue";
-let searchText = ref<string>();
+import { ElMessage } from "element-plus";
+import { onMounted, ref } from "vue";
+import { DataStore } from "@/store/date/index";
+let dataStore = DataStore();
+let userDataArr = dataStore.DataArr;
 const tableData = ref([
   {
     date: "2016-05-01",
@@ -116,6 +119,9 @@ const deleteUser = async () => {
     ElMessage({ type: "error", message: "失败" });
   }
 };
+onMounted(() => {
+  dataStore.getData();
+});
 </script>
 
 <style scoped lang="scss">

@@ -42,11 +42,12 @@
       </el-menu>
     </div>
     <div class="right">
-      <el-card>
+      <el-card class="elcard">
         <div class="tabbar">
           <p>{{$route.meta.title}}</p>
         </div>
         <router-view></router-view>
+        <Bottom></Bottom>
       </el-card>
     </div>
   </div>
@@ -69,12 +70,16 @@ let $route = useRoute();
 <style scoped lang="scss">
 .box {
   display: flex;
+  padding: 0;
+  margin: 0;
+
   .left {
     flex: 4;
     background: #f5fafe;
     height: calc(100vh - 100px);
     .el-menu-vertical-demo {
       font-size: 20px;
+      height: calc(100vh - 100px);
     }
   }
   .right {
@@ -83,13 +88,20 @@ let $route = useRoute();
     height: calc(100vh - 100px);
     // height: 100vh;
     // width: 100%;
-    .tabbar {
-      width: 100%;
-      height: 50px;
+    padding: 0;
+    margin: 0;
 
-      p {
-        font-size: 20px;
-        color: rgb(34, 170, 220);
+    .elcard {
+      width: calc(100vw - 250px);
+      height: calc(100vh - 100px);
+
+      .tabbar {
+        width: 100%;
+        height: 50px;
+        p {
+          font-size: 20px;
+          color: rgb(34, 170, 220);
+        }
       }
     }
   }
