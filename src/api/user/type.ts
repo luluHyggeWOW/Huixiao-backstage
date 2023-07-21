@@ -2,7 +2,7 @@ export interface ResponseData {
   code: number,
   msg: string,
 }
-export interface UserInfo extends ResponseData {
+export interface UserInfo {
   userAge?: number,
   userAvatar?: string,
   userCreateTime?: string,

@@ -3,7 +3,7 @@
 <template>
   <div class="bottom" v-if="$route.path!='/home'">
     <el-pagination v-model:current-page="dataStore.PageNo" v-model:page-size="dataStore.PageSize" :small="small"
-      :disabled="disabled" :background="true" layout=" prev, pager,next,->,  jumper,total, " :total="total"
+      :background="true" layout=" prev, pager,next,->,  jumper,total, " :total="dataStore.Total"
       @size-change="handleSizeChange" @current-change="handleCurrentChange" />
   </div>
 </template>

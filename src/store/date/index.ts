@@ -4,6 +4,7 @@ import { useRoute } from "vue-router";
 import { constantRoute, asnycRoute, anyRoute } from '@/router/routes'
 import { ElMessage } from "element-plus";
 import { reqLogin, reqToken, reqUserList } from "@/api/user/index";
+import { reqFankuiList } from "@/api/fankui/index";
 import type { UserInfoType } from "@/api/user/type";
 //@ts-ignore
 import cloneDeep from 'lodash/cloneDeep'
@@ -76,15 +77,15 @@ export const DataStore = defineStore('DataStore', () => {
     } else if ($route.path == "/shop") {
       // result = await q;
     } else if ($route.path == "/fankui") {
+      result = await reqFankuiList(PageNo.value, PageSize.value);
       // result = await q;
     } else {
-      // result.code = 500; 
+      result.code = 500;
     }
-    console.log(result.data);
     if (result.code == 200) {
       DataArr.value = result.data.items;
+      Total.value = result.data.counts
       console.log(111, DataArr.value);
-
     }
   };
 

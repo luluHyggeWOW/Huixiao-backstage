@@ -46,7 +46,7 @@ const goRoute = (vc: any) => {
   $router.push(vc.index);
 };
 onMounted(() => {
-  dataStore.getData();
+  $router.push({ path: "/home" });
 });
 </script>
 

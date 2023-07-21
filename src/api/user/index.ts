@@ -5,7 +5,11 @@ enum API {
   LOGIN_URL = '/user/getuser',
   LOGINOUT_URL = '/user/logout',
   GETUSERLIST_URL = '/User/getalluser',
-  SEARCHUSERBYPHONE_URL = '/User/getbyuserphone'
+  SEARCHUSERBYPHONE_URL = '/User/getbyuserphone',
+  SEARCHUSERBYUSERNAME_URL = '/User/getbyusername',
+  UPDATAUSERMESS_URL = '/User/setUserMess',
+  UPDATAPASSWORD_URL = '/User/setpass/',
+  DELETEUSER_URL = '/User/delUser'
 }
 export const reqToken = (data: any) => request1.post<any, any>(API.TOKEN_URL, data)
 export const reqLogin = (tokens: any) => {
@@ -22,3 +26,7 @@ export const reqLoginOut = (tokens: any) => {
 }
 export const reqUserList = (pageNo: number, pageSize: number) => request.get<any, any>(API.GETUSERLIST_URL + `?pageNo=${pageNo}&pageSize=${pageSize}`)
 export const reqSearchUsetByPhone = (phone: string) => request.get<any, any>(API.SEARCHUSERBYPHONE_URL + `?phone=${phone}`)
+export const reqSearchUsetByUserName = (pageNo: number, pageSize: number, name: string) => request.get<any, any>(API.SEARCHUSERBYUSERNAME_URL + `?pageNo=${pageNo}&pageSize=${pageSize}&name=${name}`)
+export const reqUpdataUserMess = (data: any) => request.post<any, any>(API.UPDATAUSERMESS_URL, data)
+export const reqUpdataPassword = (uid: any, phone: any) => request.get<any, any>(API.UPDATAPASSWORD_URL + `?uid=${uid}&phone=${phone}`)
+export const reqDeleteUser = (uid: any) => request.get<any, any>(API.DELETEUSER_URL + `?uid=${uid}`)

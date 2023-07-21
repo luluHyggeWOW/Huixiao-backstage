@@ -42,13 +42,13 @@ let dataStore = DataStore();
 let $router = useRouter();
 let userInfo = reactive({
   phone: "15002294399",
-  password: "123456789",
+  password: "123456",
 });
 const goLogin = () => {
   dataStore.LoginDialog = true;
   Object.assign(userInfo, {
     phone: "15002294399",
-    password: "123456789",
+    password: "123456",
   });
 };
 const goHome = () => {
