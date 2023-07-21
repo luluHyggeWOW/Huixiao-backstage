@@ -45,7 +45,9 @@ const goRoute = (vc: any) => {
   // 路由跳转
   $router.push(vc.index);
 };
-onMounted(() => {});
+onMounted(() => {
+  dataStore.getData();
+});
 </script>
 
 <style scoped lang="scss">

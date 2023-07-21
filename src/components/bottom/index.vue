@@ -2,8 +2,8 @@
 
 <template>
   <div class="bottom" v-if="$route.path!='/home'">
-    <el-pagination v-model:current-page="pageNo" v-model:page-size="pageSize" :page-sizes="pageSizes" :small="small"
-      :disabled="disabled" :background="true" layout=" prev, pager,next,->,  jumper,total, sizes," :total="total"
+    <el-pagination v-model:current-page="dataStore.PageNo" v-model:page-size="dataStore.PageSize" :small="small"
+      :disabled="disabled" :background="true" layout=" prev, pager,next,->,  jumper,total, " :total="total"
       @size-change="handleSizeChange" @current-change="handleCurrentChange" />
   </div>
 </template>
@@ -15,17 +15,14 @@ import { DataStore } from "@/store/date/index";
 let dataStore = DataStore();
 let $route = useRoute();
 let $router = useRouter();
-let pageNo = ref<number>(1);
-let pageSize = ref<number>(10);
-let pageSizes = ref<number[]>([10, 20, 30, 40]);
 let total = ref<number>(20);
 let dataArr = ref<any>();
 let searchText = dataStore.SearchText;
 const handleSizeChange = () => {
-  dataStore.getData(pageNo.value, pageSize.value);
+  dataStore.getData();
 };
 const handleCurrentChange = () => {
-  dataStore.getData(pageNo.value, pageSize.value);
+  dataStore.getData();
 };
 watch(
   () => $route.path,
@@ -33,13 +30,13 @@ watch(
     //要执行的方法
     console.log(newValues, oldValues);
     if (newValues == "/user") {
-      pageSize.value = 10;
+      dataStore.PageSize = 5;
     } else if (newValues == "/shop" || newValues == "/forum") {
-      pageSize.value = 4;
+      dataStore.PageSize = 4;
     } else if (newValues == "/news" || newValues == "/fankui") {
-      pageSize.value = 8;
+      dataStore.PageSize = 8;
     }
-    pageNo.value = 1;
+    dataStore.PageNo = 1;
   },
   { immediate: true, deep: true }
 );

@@ -1,16 +1,16 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 
-const request = axios.create({
-  baseURL: 'http://101.43.241.101:8000/',
+const request1 = axios.create({
+  baseURL: 'http://101.43.241.101:63010/',
   timeout: 5000
 })
 // 请求拦截器
-request.interceptors.request.use((config) => {
+request1.interceptors.request.use((config) => {
   return config
 })
 // 响应拦截器
-request.interceptors.response.use((response) => {
+request1.interceptors.response.use((response) => {
   return response.data
 }, (error) => {
   // let status = error.response.status
@@ -18,4 +18,4 @@ request.interceptors.response.use((response) => {
   return Promise.reject(new Error(error.message))
 })
 // 对外暴露
-export default request
+export default request1

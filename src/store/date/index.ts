@@ -3,18 +3,17 @@ import { ref } from "vue";
 import { useRoute } from "vue-router";
 import { constantRoute, asnycRoute, anyRoute } from '@/router/routes'
 import { ElMessage } from "element-plus";
-import { reqLogin, reqToken } from "@/api/user/index";
+import { reqLogin, reqToken, reqUserList } from "@/api/user/index";
 import type { UserInfoType } from "@/api/user/type";
 //@ts-ignore
 import cloneDeep from 'lodash/cloneDeep'
 import router from "@/router";
-const $route = useRoute();
 export const DataStore = defineStore('DataStore', () => {
+  const $route = useRoute();
   let DataArr = ref<any>([])
   let SearchText = ref<string>('')
-  let PageNo = ref<number>()
-  let PageSize = ref<number>()
-  let PageSizes = ref<number[]>([])
+  let PageNo = ref<number>(1)
+  let PageSize = ref<number>(10)
   let Total = ref<number>()
   // let menuRoutes = ref<any>(constantRoute)
   let menuRoutes = ref<any>([...constantRoute, ...asnycRoute, ...anyRoute])
@@ -64,26 +63,29 @@ export const DataStore = defineStore('DataStore', () => {
     }
 
   }
-  const getData = async (pageNo, pageSize) => {
-    // let result: any;
-    // DataArr.value = ([])
-    // console.log($route.path);
-    // if ($route.path == "/user") {
-    //   result = await q;
-    // } else if ($route.path == "/home") {
-    //   result = await q;
-    // } else if ($route.path == "/forum") {
-    //   result = await q;
-    // } else if ($route.path == "/shop") {
-    //   result = await q;
-    // } else if ($route.path == "/fankui") {
-    //   result = await q;
-    // } else {
-    //   result.code = 500;
-    // }
-    // if (result.code == 200) {
-    //   DataArr.value = result.data;
-    // }
+  const getData = async () => {
+    let result: any;
+    DataArr.value = ([])
+    console.log($route.path);
+    if ($route.path == "/user") {
+      result = await reqUserList(PageNo.value, PageSize.value);
+    } else if ($route.path == "/home") {
+      // result = await q;
+    } else if ($route.path == "/forum") {
+      // result = await q;
+    } else if ($route.path == "/shop") {
+      // result = await q;
+    } else if ($route.path == "/fankui") {
+      // result = await q;
+    } else {
+      // result.code = 500; 
+    }
+    console.log(result.data);
+    if (result.code == 200) {
+      DataArr.value = result.data.items;
+      console.log(111, DataArr.value);
+
+    }
   };
 
   return {
@@ -91,7 +93,6 @@ export const DataStore = defineStore('DataStore', () => {
     SearchText,
     PageNo,
     PageSize,
-    PageSizes,
     Total,
     getData,
     menuRoutes,
