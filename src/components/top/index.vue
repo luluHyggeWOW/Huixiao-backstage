@@ -6,27 +6,25 @@
     <el-menu class="el-menu-demo" mode="horizontal">
       <el-sub-menu class="userimg">
         <template #title><img src="../../assets/images/neutral.png" alt=""></template>
-        <el-menu-item index="2-2" class="elmenuitem" @click="dialogVisible=true">去登录</el-menu-item>
-        <el-menu-item index="2-3" class="elmenuitem">退出登录</el-menu-item>
+        <el-menu-item index="2-2" class="elmenuitem" @click="goLogin">去登录</el-menu-item>
+        <el-menu-item index="2-3" class="elmenuitem" @click="goLoginout">退出登录</el-menu-item>
       </el-sub-menu>
     </el-menu>
-    <el-dialog v-model="dialogVisible" title="登录" width="30%" :before-close="handleClose">
+    <el-dialog v-model="dataStore.LoginDialog" title="登录" width="30%" :before-close="handleClose">
       <template #default>
         <el-form size="large">
-          <el-form-item label="手机号：">
-            <el-input></el-input>
+          <el-form-item label="手机号：" label-width="80">
+            <el-input v-model="userInfo.phone" maxlength="11" placeholder="请输入手机号"></el-input>
           </el-form-item>
-          <el-form-item label=" 密  码：">
-            <el-input type="password"></el-input>
+          <el-form-item label="密  码：" label-width="80">
+            <el-input type="password" v-model="userInfo.password" placeholder="请输入密码"></el-input>
           </el-form-item>
         </el-form>
       </template>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">取消</el-button>
-          <el-button type="primary" @click="dialogVisible = false">
-            登录
-          </el-button>
+          <el-button @click="cancel">取消</el-button>
+          <el-button type="primary" @click="Login">登录</el-button>
         </span>
       </template>
     </el-dialog>
@@ -35,16 +33,55 @@
 
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import { ref, reactive } from "vue";
-
+import { ref, reactive, onMounted } from "vue";
+import { DataStore } from "@/store/date/index";
+import { reqLoginOut } from "@/api/user/index";
+import { ElMessage } from "element-plus";
+import { constantRoute } from "@/router/routes";
+let dataStore = DataStore();
 let $router = useRouter();
-let dialogVisible = ref<boolean>(false);
 let userInfo = reactive({
-  phone: "",
+  phone: "15002294399",
+  password: "123456789",
 });
+const goLogin = () => {
+  dataStore.LoginDialog = true;
+  Object.assign(userInfo, {
+    phone: "15002294399",
+    password: "123456789",
+  });
+};
 const goHome = () => {
   $router.push({ path: "/home" });
 };
+const cancel = () => {
+  dataStore.LoginDialog = false;
+};
+const Login = () => {
+  var data = new FormData();
+  data.append(
+    "username",
+    `{"password":${userInfo.password},"authType":"password","cellphone":${userInfo.phone}}`
+  );
+  dataStore.Token(data).then((res) => {
+    if ((res as string) == "ok") dataStore.LoginDialog = false;
+  });
+};
+const goLoginout = async () => {
+  let result: any = await reqLoginOut(localStorage.getItem("token"));
+  if (result.code == 200) {
+    localStorage.removeItem("token");
+    dataStore.UserInfo = "";
+    dataStore.menuRoutes = constantRoute;
+    ElMessage({ type: "success", message: "退出成功" });
+    $router.push({ path: "/home" });
+  } else {
+    ElMessage({ type: "error", message: "退出失败" });
+  }
+};
+onMounted(() => {
+  // dataStore.Login();
+});
 </script>
 
 <style scoped lang="scss">

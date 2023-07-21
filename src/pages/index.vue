@@ -1,44 +1,17 @@
 <template>
   <div class="box">
     <div class="left">
-      <el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
-        background-color="#f5fafe" router="true" text-size="50" :ollapse-transition='false'>
-        <el-menu-item index="/home">
-          <el-icon>
-            <House />
-          </el-icon>
-          <span>首页</span>
-        </el-menu-item>
-        <el-menu-item index="/user">
-          <el-icon>
-            <User />
-          </el-icon>
-          <span>用户管理</span>
-        </el-menu-item>
-        <el-menu-item index="/news">
-          <el-icon>
-            <Document />
-          </el-icon>
-          <span>新闻管理</span>
-        </el-menu-item>
-        <el-menu-item index="/forum">
-          <el-icon>
-            <Message />
-          </el-icon>
-          <span>论坛管理</span>
-        </el-menu-item>
-        <el-menu-item index="/shop">
-          <el-icon>
-            <ShoppingCart />
-          </el-icon>
-          <span>市场管理</span>
-        </el-menu-item>
-        <el-menu-item index="/fankui">
-          <el-icon>
-            <Wallet />
-          </el-icon>
-          <span>反馈管理</span>
-        </el-menu-item>
+      <el-menu :default-active="$route.path" class="el-menu-vertical-demo" background-color="#f5fafe" text-size="50"
+        :ollapse-transition='false'>
+        <!-- {{item.path}} -->
+        <template v-for="item in dataStore.menuRoutes" :key="item">
+          <el-menu-item :index="item.path" v-if="!item.meta.hidden" @click="goRoute">
+            <el-icon>
+              <component :is="item.meta.icon"></component>
+            </el-icon>
+            <span>{{item.meta.title}}</span>
+          </el-menu-item>
+        </template>
       </el-menu>
     </div>
     <div class="right">
@@ -62,9 +35,17 @@ import {
   ShoppingCart,
   Wallet,
 } from "@element-plus/icons-vue";
-import { useRoute } from "vue-router";
-
+import { onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { DataStore } from "@/store/date/index";
+let dataStore = DataStore();
 let $route = useRoute();
+let $router = useRouter();
+const goRoute = (vc: any) => {
+  // 路由跳转
+  $router.push(vc.index);
+};
+onMounted(() => {});
 </script>
 
 <style scoped lang="scss">

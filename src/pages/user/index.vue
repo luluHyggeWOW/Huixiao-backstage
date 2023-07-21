@@ -55,7 +55,7 @@
       <template #footer>
         <div style="flex: auto">
           <el-button @click="cancelClick">cancel</el-button>
-          <el-button type="primary" @click="confirmClick">confirm</el-button>
+          <el-button type="primary" @click="confirmClick">更新</el-button>
         </div>
       </template>
     </el-drawer>
@@ -63,13 +63,132 @@
 </template>
 
 <script setup lang="ts">
-import { log } from "console";
 import { ElMessage } from "element-plus";
 import { onMounted, ref } from "vue";
 import { DataStore } from "@/store/date/index";
 let dataStore = DataStore();
 let userDataArr = dataStore.DataArr;
 const tableData = ref([
+  {
+    date: "2016-05-01",
+    name: "Tom",
+    state: "California",
+    city: "Los Angeles",
+    address: "No. 189, Grove St, Los Angeles",
+    zip: "CA 90036",
+  },
+  {
+    date: "2016-05-02",
+    name: "Tom",
+    state: "California",
+    city: "Los Angeles",
+    address: "No. 189, Grove St, Los Angeles",
+    zip: "CA 90036",
+  },
+  {
+    date: "2016-05-03",
+    name: "Tom",
+    state: "California",
+    city: "Los Angeles",
+    address: "No. 189, Grove St, Los Angeles",
+    zip: "CA 90036",
+  },
+  {
+    date: "2016-05-01",
+    name: "Tom",
+    state: "California",
+    city: "Los Angeles",
+    address: "No. 189, Grove St, Los Angeles",
+    zip: "CA 90036",
+  },
+  {
+    date: "2016-05-02",
+    name: "Tom",
+    state: "California",
+    city: "Los Angeles",
+    address: "No. 189, Grove St, Los Angeles",
+    zip: "CA 90036",
+  },
+  {
+    date: "2016-05-03",
+    name: "Tom",
+    state: "California",
+    city: "Los Angeles",
+    address: "No. 189, Grove St, Los Angeles",
+    zip: "CA 90036",
+  },
+  {
+    date: "2016-05-01",
+    name: "Tom",
+    state: "California",
+    city: "Los Angeles",
+    address: "No. 189, Grove St, Los Angeles",
+    zip: "CA 90036",
+  },
+  {
+    date: "2016-05-02",
+    name: "Tom",
+    state: "California",
+    city: "Los Angeles",
+    address: "No. 189, Grove St, Los Angeles",
+    zip: "CA 90036",
+  },
+  {
+    date: "2016-05-03",
+    name: "Tom",
+    state: "California",
+    city: "Los Angeles",
+    address: "No. 189, Grove St, Los Angeles",
+    zip: "CA 90036",
+  },
+  {
+    date: "2016-05-01",
+    name: "Tom",
+    state: "California",
+    city: "Los Angeles",
+    address: "No. 189, Grove St, Los Angeles",
+    zip: "CA 90036",
+  },
+  {
+    date: "2016-05-02",
+    name: "Tom",
+    state: "California",
+    city: "Los Angeles",
+    address: "No. 189, Grove St, Los Angeles",
+    zip: "CA 90036",
+  },
+  {
+    date: "2016-05-03",
+    name: "Tom",
+    state: "California",
+    city: "Los Angeles",
+    address: "No. 189, Grove St, Los Angeles",
+    zip: "CA 90036",
+  },
+  {
+    date: "2016-05-01",
+    name: "Tom",
+    state: "California",
+    city: "Los Angeles",
+    address: "No. 189, Grove St, Los Angeles",
+    zip: "CA 90036",
+  },
+  {
+    date: "2016-05-02",
+    name: "Tom",
+    state: "California",
+    city: "Los Angeles",
+    address: "No. 189, Grove St, Los Angeles",
+    zip: "CA 90036",
+  },
+  {
+    date: "2016-05-03",
+    name: "Tom",
+    state: "California",
+    city: "Los Angeles",
+    address: "No. 189, Grove St, Los Angeles",
+    zip: "CA 90036",
+  },
   {
     date: "2016-05-01",
     name: "Tom",

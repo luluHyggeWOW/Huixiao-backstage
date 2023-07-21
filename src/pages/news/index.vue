@@ -7,7 +7,7 @@
       <el-form-item>
         <el-table :data="tableData" style="width: 100%" border>
           <el-table-column prop="date" label="新闻ID" width="150" />
-          <el-table-column prop="zip" label="新闻内容" show-overflow-tooltip />
+          <el-table-column prop="zip" label="新闻内容" />
           <el-table-column prop="name" label="上传日期" width="150" />
           <el-table-column prop="name" label="更新日期" width="150" />
           <el-table-column label="操作" width="200">
@@ -50,7 +50,7 @@
       <template #footer>
         <div style="flex: auto">
           <el-button @click="cancelClick">取消</el-button>
-          <el-button type="primary" @click="updateNews()">确定</el-button>
+          <el-button type="primary" @click="updateNews()">更新</el-button>
         </div>
       </template>
     </el-drawer>

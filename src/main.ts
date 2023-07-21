@@ -5,7 +5,7 @@ import Top from '@/components/top/index.vue'
 import Main from '@/pages/index.vue'
 import Bottom from '@/components/bottom/index.vue'
 import Search from '@/components/search/index.vue'
-import router from '@/router'
+import router from '@/router/index'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
