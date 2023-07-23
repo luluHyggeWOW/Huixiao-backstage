@@ -1,9 +1,11 @@
 <template>
   <div class="elcard2">
     <div class="box">
-      <img src="../../assets/images/logo1.png" alt="" class="avatar">
+      <img :src="dataStore.UserInfo.userAvatar?dataStore.UserInfo.userAvatar:'../../assets/images/logo1.png'" alt=""
+        class="avatar">
       <div class="title">
-        <h3>{{getTime()}}好！打工人XX</h3>
+        <h3>{{getTime()}}好！帅哥
+          {{dataStore.UserInfo.userName?dataStore.UserInfo.userName:'无名者'}}</h3>
         <p>慧校后台管理</p>
       </div>
     </div>
@@ -13,6 +15,8 @@
 
 <script setup lang="ts">
 import { getTime } from "@/utils/time";
+import { DataStore } from "@/store/date/index";
+let dataStore = DataStore();
 </script>
 
 <style scoped lang="scss">

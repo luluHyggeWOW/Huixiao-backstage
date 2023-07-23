@@ -5,6 +5,9 @@ import { constantRoute, asnycRoute, anyRoute } from '@/router/routes'
 import { ElMessage } from "element-plus";
 import { reqLogin, reqToken, reqUserList } from "@/api/user/index";
 import { reqFankuiList } from "@/api/fankui/index";
+import { reqForumList } from "@/api/forum/index";
+import { reqNewsList } from "@/api/news/index";
+import { reqShopList } from "@/api/shop/index";
 import type { UserInfoType } from "@/api/user/type";
 //@ts-ignore
 import cloneDeep from 'lodash/cloneDeep'
@@ -71,21 +74,26 @@ export const DataStore = defineStore('DataStore', () => {
     if ($route.path == "/user") {
       result = await reqUserList(PageNo.value, PageSize.value);
     } else if ($route.path == "/home") {
-      // result = await q;
     } else if ($route.path == "/forum") {
-      // result = await q;
+      result = await reqForumList(PageNo.value, PageSize.value);
     } else if ($route.path == "/shop") {
-      // result = await q;
+      result = await reqShopList(PageNo.value);
     } else if ($route.path == "/fankui") {
       result = await reqFankuiList(PageNo.value, PageSize.value);
-      // result = await q;
+    } else if ($route.path == "/news") {
+      result = await reqNewsList(PageNo.value, PageSize.value);
     } else {
       result.code = 500;
     }
     if (result.code == 200) {
-      DataArr.value = result.data.items;
-      Total.value = result.data.counts
-      console.log(111, DataArr.value);
+      if ($route.path == "/shop") {
+        DataArr.value = result.data;
+        Total.value = 26
+      }
+      else {
+        DataArr.value = result.data.items;
+        Total.value = result.data.counts
+      }
     }
   };
 

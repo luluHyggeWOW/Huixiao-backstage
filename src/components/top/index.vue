@@ -5,7 +5,9 @@
     </div>
     <el-menu class="el-menu-demo" mode="horizontal">
       <el-sub-menu class="userimg">
-        <template #title><img src="../../assets/images/neutral.png" alt=""></template>
+        <template #title><img
+            :src="dataStore.UserInfo.userName?dataStore.UserInfo.userAvatar:'../../assets/images/neutral.png'"
+            alt=""></template>
         <el-menu-item index="2-2" class="elmenuitem" @click="goLogin">去登录</el-menu-item>
         <el-menu-item index="2-3" class="elmenuitem" @click="goLoginout">退出登录</el-menu-item>
       </el-sub-menu>

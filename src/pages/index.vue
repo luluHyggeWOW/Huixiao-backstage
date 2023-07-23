@@ -47,6 +47,7 @@ const goRoute = (vc: any) => {
 };
 onMounted(() => {
   $router.push({ path: "/home" });
+  dataStore.Login();
 });
 </script>
 

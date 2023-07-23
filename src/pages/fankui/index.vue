@@ -11,20 +11,20 @@
       </el-form>
       <el-form-item>
         <el-table :data="dataStore.DataArr" style="width: 100%" border>
-          <el-table-column prop="huid" label="反馈人ID" width="200" />
-          <el-table-column prop="hlocation" label="反馈地点" width="200" />
-          <el-table-column prop="hsource" label="反馈内容" width="620" show-overflow-tooltip />
-          <el-table-column prop="hdata" label="反馈时间" width="200" />
+          <el-table-column prop="huid" label="反馈人ID" width="200" align="center" />
+          <el-table-column prop="hlocation" label="反馈地点" width="200" align="center" />
+          <el-table-column prop="hsource" label="反馈内容" width="620" show-overflow-tooltip align="center" />
+          <el-table-column prop="hdata" label="反馈时间" width="200" align="center" />
           <el-table-column prop="hstate" label="是否解决" width="100" align="center">
             <template #default={row}>
               <el-checkbox v-model="isCheck[row.hstate]" label="" size="large" disabled />
             </template>
           </el-table-column>
-          <el-table-column label="操作" width="300">
+          <el-table-column label="操作" width="300" align="center">
             <template #default={row}>
               <el-button link type="error" size="large"
                 @click="chanckFankui(row)">{{row.hstate==0?'解决反馈':'取消解决'}}</el-button>
-              <el-button link type="primary" size="large" @click="updateFankuiShow(row)">编辑反馈</el-button>
+              <el-button link type="primary" size="large" @click="updateFankuiShow(row)" disabled>编辑反馈</el-button>
               <el-popconfirm title="你确定要删除此反馈?" @confirm="deleteFankui" width="200">
                 <template #reference>
                   <el-button link type="warning" size="large">删除反馈</el-button>
@@ -39,7 +39,7 @@
       <template #header>
         <h4>更新反馈</h4>
       </template>
-      <template #default={row}>
+      <template #defaul>
         <el-form>
           <el-form-item label="反馈人：" size="large" label-width="100px">
             {{updateFankuiInfo.huid}}

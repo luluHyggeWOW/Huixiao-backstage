@@ -9,7 +9,7 @@ enum API {
   SEARCHUSERBYUSERNAME_URL = '/User/getbyusername',
   UPDATAUSERMESS_URL = '/User/setUserMess',
   UPDATAPASSWORD_URL = '/User/setpass/',
-  DELETEUSER_URL = '/User/delUser'
+  DELETEUSER_URL = '/User/delUser',
 }
 export const reqToken = (data: any) => request1.post<any, any>(API.TOKEN_URL, data)
 export const reqLogin = (tokens: any) => {

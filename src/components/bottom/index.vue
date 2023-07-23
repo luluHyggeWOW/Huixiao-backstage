@@ -31,10 +31,12 @@ watch(
     console.log(newValues, oldValues);
     if (newValues == "/user") {
       dataStore.PageSize = 5;
-    } else if (newValues == "/shop" || newValues == "/forum") {
-      dataStore.PageSize = 4;
+    } else if (newValues == "/shop") {
+      dataStore.PageSize = 9;
     } else if (newValues == "/news" || newValues == "/fankui") {
       dataStore.PageSize = 8;
+    } else if (newValues == "/forum") {
+      dataStore.PageSize = 4;
     }
     dataStore.PageNo = 1;
   },

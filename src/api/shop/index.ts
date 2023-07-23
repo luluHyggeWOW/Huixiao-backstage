@@ -1,10 +1,15 @@
 import request from "@/utils/request";
-import type { HospitalResponseData, HospitalLevelOrRegionArrResponseData, HospitalInfo } from "@/api/home/type";
 enum API {
-  HOSPITAL_URL = '/hosp/hospital/',
-  HOSPITALLEVELANDREGION_URL = 'cmn/dict/findByDictCode/',
-  HOSPITALINFO_URL = '/hosp/hospital/findByHosname/'
+  GETSHOPLIST_URL = '/shop/open/get/',
+  DELETESHOP_URL = '/shop/delete/',
+  SEARCHBYNAME_URL = '/shop/getbyname',
+  SEARCHBYSOURCE_URL = '/shop/getbysource',
+  UPDATASHOP_URL = '/shop/upmess',
 }
-export const reqHospital = (page: number, limit: number, hostype: '', districtCode: '') => request.get<any, HospitalResponseData>(API.HOSPITAL_URL + `${page}/${limit}?hostype=${hostype}&districtCode=${districtCode}`)
-export const reqHospitalLevelOrRegion = (dictCode: string) => request.get<any, HospitalLevelOrRegionArrResponseData>(API.HOSPITALLEVELANDREGION_URL + dictCode)
-export const reqHospitalInfo = (hosname: string) => request.get<any, HospitalInfo>(API.HOSPITALINFO_URL + hosname)
+export const reqShopList = (pageNo: number) => request.get<any, any>(API.GETSHOPLIST_URL + `${pageNo}`)
+export const reqDeleteShop = (id: string) => request.delete<any, any>(API.DELETESHOP_URL + `${id}`)
+export const reqSearchByName = (pageNo: number, pageSize: number, name: string) => request.get<any, any>(API.SEARCHBYNAME_URL + `?pageNo=${pageNo}&pageSize=${pageSize}&name=${name}`)
+export const reqSearchBySource = (pageNo: number, pageSize: number, source: string) => request.get<any, any>(API.SEARCHBYSOURCE_URL + `?pageNo=${pageNo}&pageSize=${pageSize}&source=${source}`)
+// export const reqGetNewsInfo = (eid: string) => request.get<any, any>(API.GETNEWSINFO_URL + `?Eid=${eid}`)
+export const reqUpdataShop = (data: any) => request.post<any, any>(API.UPDATASHOP_URL, data)
+// export const reqDeleteNews = (id: string) => request.get<any, any>(API.DELETENEWS_URL + `${id}`)
